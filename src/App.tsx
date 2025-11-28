@@ -7,7 +7,21 @@ import Login from './pages/Login';
 import StudentProfile from './pages/StudentProfile';
 import ProfessionalProfile from './pages/ProfessionalProfile';
 import CompanyProfile from './pages/CompanyProfile';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
+function ScrollTopOrFixHash() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Remove trailing slash from hash
+    if (location.hash.endsWith('/')) {
+      window.location.hash = location.hash.slice(0, -1);
+    }
+  }, [location]);
+
+  return null;
+}
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
   
@@ -66,20 +80,5 @@ function App() {
   );
 }
 
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-
-function ScrollTopOrFixHash() {
-  const location = useLocation();
-
-  useEffect(() => {
-    // Remove trailing slash from hash
-    if (location.hash.endsWith('/')) {
-      window.location.hash = location.hash.slice(0, -1);
-    }
-  }, [location]);
-
-  return null;
-}
 
 export default App;
