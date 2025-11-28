@@ -1,3 +1,19 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function ScrollTopOrFixHash() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Remove trailing slash from hash
+    if (location.hash.endsWith('/')) {
+      window.location.hash = location.hash.slice(0, -1);
+    }
+  }, [location]);
+
+  return null;
+}
+
 import React from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
